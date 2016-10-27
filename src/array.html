@@ -1,4 +1,4 @@
-<div class="schema-form-array {{form.htmlClass}}"
+<div class="form-group schema-form-array {{form.htmlClass}}"
      sf-field-model="sf-new-array"
      sf-new-array>
   <label class="control-label" ng-show="showTitle()">{{ form.title }}</label>
@@ -6,25 +6,27 @@
           ng-click="appendToArray()"
           ng-disabled="form.schema.maxItems <= modelArray.length"
           type="button"
-          class="btn {{ form.style.add || 'btn-link btn-xs pull-right' }}">
+          class="btn pull-right {{ form.style.add || 'btn-link btn-xs' }}">
     <i class="glyphicon glyphicon-plus"></i>
     {{ form.add || 'Add'}}
   </button>
-  <ol class="list-group" sf-field-model ui-sortable="form.sortOptions">
+  <ol class="list-group" sf-field-model ui-sortable="form.sortOptions" style="margin-bottom: 0;">
     <li class="list-group-item {{form.fieldHtmlClass}}"
         schema-form-array-items
         sf-field-model="ng-repeat"
-        ng-repeat="item in $$value$$ track by $index">
+        ng-repeat="item in $$value$$ track by $index"
+        style="padding-right: 2em;">
       <button ng-hide="form.readonly || form.remove === null"
               ng-click="deleteFromArray($index)"
               ng-disabled="form.schema.minItems >= modelArray.length"
-              style="position: relative; z-index: 20;"
-              type="button" class="close pull-right">
+              type="button"
+              class="close pull-right"
+              style="position: absolute; top: .3em; right: .4em; z-index: 20;" >
               <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
       </button>
     </li>
   </ol>
-  <div class="clearfix" style="padding: 15px;" schema-validate="form" 
+  <div class="clearfix" style="padding: 0 15px;" schema-validate="form"
        ng-class="{'has-error': form.disableErrorState !== true && hasError()}"
        ng-model="modelArray">
     <div class="help-block"
