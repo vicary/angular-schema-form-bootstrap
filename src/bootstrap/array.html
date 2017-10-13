@@ -13,12 +13,13 @@
   <ol class="list-group" sf-field-model ui-sortable="form.sortOptions">
     <li class="list-group-item {{::form.fieldHtmlClass}}"
         sf-field-model="ng-repeat"
-        ng-repeat="item in $$value$$ track by $id(trackBy(item, $index))">
+        ng-repeat="item in $$value$$ track by $id(trackBy(item, $index))"
+        style="padding-right: 2em;">
       <button ng-hide="form.readonly || form.remove === null"
               ng-click="deleteFromArray(item)"
               ng-disabled="form.schema.minItems >= modelArray.length"
               type="button"
-              class="{{ form.style.remove || 'btn btn-link pull-right' }}"
+              class="{{ form.style.remove || 'btn btn-link btn-xs pull-right' }}"
               style="position: absolute; top: .7em; right: .4em; z-index: 20;" >
               <span class="glyphicon glyphicon-minus-sign"></span>
               <span class="sr-only">Close</span>
