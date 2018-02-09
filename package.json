@@ -24,7 +24,8 @@
     "angular-messages": "^1.5.0",
     "angular-sanitize": ">= 1.2",
     "angular-schema-form": "^1.0.0-alpha.4",
-    "tv4": "~1.0.15"
+    "tv4": "~1.0.15",
+    "uglify-es": "github:mishoo/UglifyJS2#harmony"
   },
   "devDependencies": {
     "babel": "^6.5.2",
