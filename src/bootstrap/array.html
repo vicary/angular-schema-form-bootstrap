@@ -1,30 +1,40 @@
 <div class="schema-form-array {{::form.htmlClass + ' ' + idClass}}"
      sf-field-model="sf-new-array"
      sf-new-array>
-  <label class="control-label" ng-show="showTitle()">{{ form.title }}</label>
-  <button ng-hide="form.readonly || form.add === null"
-          ng-click="appendToArray()"
-          ng-disabled="form.schema.maxItems <= modelArray.length"
-          type="button"
-          class="{{ form.style.add || 'btn btn-link btn-xs pull-right' }}">
-    <i class="glyphicon glyphicon-plus-sign"></i>
-    {{ form.add || 'Add'}}
-  </button>
-  <ol class="list-group" sf-field-model ui-sortable="form.sortOptions">
-    <li class="list-group-item {{::form.fieldHtmlClass}}"
-        sf-field-model="ng-repeat"
-        ng-repeat="item in $$value$$ track by $id(trackBy(item, $index))">
-      <button ng-hide="form.readonly || form.remove === null"
-              ng-click="deleteFromArray(item)"
-              ng-disabled="form.schema.minItems >= modelArray.length"
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <label class="control-label" ng-show="showTitle()" style="margin-bottom: 0;">{{ form.title }}</label>
+      <button ng-hide="form.readonly || form.add === null"
+              ng-click="appendToArray()"
+              ng-disabled="form.schema.maxItems <= modelArray.length"
               type="button"
-              class="{{ form.style.remove || 'btn btn-link btn-xs pull-right' }}">
-              <span class="glyphicon glyphicon-minus-sign"></span>
-              <span class="sr-only">Close</span>
+              class="{{ form.style.add || 'btn btn-link btn-xs pull-right' }}">
+        <i class="glyphicon glyphicon-plus-sign"></i>
+        {{ form.add || 'Add'}}
       </button>
-      <div schema-form-array-items sf-key-controller sf-parent-key="[{{form.key.join('][')}}]" sf-index="{{$index}}"></div>
-    </li>
-  </ol>
+    </div>
+
+    <div class="panel-body text-center text-muted" ng-if="!modelArray.length">
+      <em>{{ form.emptyText || 'No items yet' }}</em>
+    </div>
+
+    <ol class="list-group" sf-field-model ui-sortable="form.sortOptions">
+      <li class="list-group-item {{::form.fieldHtmlClass}}"
+          sf-field-model="ng-repeat"
+          ng-repeat="item in $$value$$ track by $id(trackBy(item, $index))">
+        <button ng-hide="form.readonly || form.remove === null"
+                ng-click="deleteFromArray(item)"
+                ng-disabled="form.schema.minItems >= modelArray.length"
+                type="button"
+                class="{{ form.style.remove || 'btn btn-link btn-xs pull-right' }}">
+                <span class="glyphicon glyphicon-minus-sign"></span>
+                <span class="sr-only">Close</span>
+        </button>
+        <div schema-form-array-items sf-key-controller sf-parent-key="[{{form.key.join('][')}}]" sf-index="{{$index}}"></div>
+      </li>
+    </ol>
+  </div>
+
   <div class="clearfix" style="padding: 0 15px;" schema-validate="form"
        ng-if="hasError() ? errorMessage(schemaError()) : form.description"
        ng-class="{'has-error': form.disableErrorState !== true && hasError()}"
